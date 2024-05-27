@@ -38,6 +38,7 @@ def main():
     elif args.object == "dice":
         roll_dice(args.iterations, args.sides)
 
+
 def flip_coin(iterations):
 
     if iterations > MAX_ITERATIONS or iterations < 0:
@@ -63,23 +64,27 @@ def flip_coin(iterations):
 def roll_dice(iterations, sides):
 
     # COMMIT 3: Restrict input range for dice iterations and sides
+    if iterations > MAX_ITERATIONS or iterations < 0:
+        print("Number of rolls must be in the range [0 - {}]"
+                .format(MAX_ITERATIONS))
+        return
+
+    if sides > MAX_SIDES or sides < 1:
+        print("Number of sides must be in the range [1 - {}]"
+                .format(MAX_SIDES))
+        return
 
     # COMMIT 2: Add dice rolling logic and output dice sum and sequence
-    diceSum = random.randint(1, iterations * 6)
+    diceRecord, diceSum = [], 0
+    for i in range(iterations):
+        roll = random.randint(1, sides)
+        diceRecord.append(roll)
+        diceSum += roll
 
     print("{} roll(s) of a {}-sided die resulted in a sum of {}:"
             .format(iterations, sides, diceSum))
+    print(*diceRecord, sep=', ')
+
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
